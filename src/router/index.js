@@ -1,15 +1,16 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import Home from "../views/Home.vue";
-import Dashboard from "../views/Dashboard.vue";
+import index from "../views/index.vue";
+import profile from "../views/profile.vue";
 
 Vue.use(VueRouter);
+const About = { template: "<div>About</div>" };
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: Home
+    component: index
   },
   {
     path: "/about",
@@ -17,16 +18,23 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue")
+    component: About
   },
-  {
+  /* {
     path: "/Dashboard",
     name: "Dashboard",
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: Dashboard
+  }, */
+  {
+    path: "/profile",
+    name: "profile",
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: profile
   }
 ];
 
