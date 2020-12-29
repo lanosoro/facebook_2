@@ -13,19 +13,19 @@
              <p style="display:inline; font-size:27px;"> Facebook helps you connect and share <br> with the people in your life.</p>
         </div>
 
-         <v-card elevation="8" width="396px" height="390.35px"  class="mx-auto mt-10% mb" style="position: absolute;
+         <v-card elevation="8" width="396px" height="390.35px" @submit.prevent="logged" class="mx-auto mt-10% mb" style="position: absolute;
     top: 20%;
     right: 20%;
     margin-top: -50px;
     margin-left: -50px;
     border-radius:10px;" >
       <v-card-text>
-        <v-form>
+        <v-form >
           <v-text-field  single-line
             outlined label="Email adress or Phone number" />
           <v-text-field single-line
             outlined label="Password" type="password"  />
-          <v-btn primary large block  style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
+          <v-btn primary large block type="submit"  style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
 line-height: 48px;" >
            <strong>log in</strong> 
           </v-btn>
@@ -167,15 +167,27 @@ line-height: 48px;" >
 </template>
 
 <script>
-
+import { firebase } from "firebase/app";
+import "firebase/firestore";
+import "firebase/auth";
 export default {
     name: 'loginweb',
 
-    data: () => ({
-      
-     
-    
-    }),
+   data(){
+     return{
+       email:"",
+       password:""
+     };
+   },
+   methods:{
+     logged(){
+       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(()=>
+       {
+         console.log('logged in')
+         this.$router.replace({path:"/profile"})
+       })
+     }
+   }
   }
 
 </script>
