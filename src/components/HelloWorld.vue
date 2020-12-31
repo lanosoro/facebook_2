@@ -25,7 +25,7 @@
             outlined label="Email adress or Phone number" />
           <v-text-field single-line
             outlined label="Password" type="password"  />
-          <v-btn primary large block type="submit"  style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
+          <v-btn primary large block type="submit" @click="logged" style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
 line-height: 48px;" >
            <strong>log in</strong> 
           </v-btn>
@@ -76,13 +76,13 @@ line-height: 48px;" >
         <v-footer style="bottom:0; position:absolute; background-color:white; width:100%; " class="justify-center">
       
         <v-card flat tile class="white lighten-1 #ccd0d5--text text-center pt-0" >
-          <v-card-text>
+          <!-- <v-card-text>
             <v-btn v-for="icon in icons" :key="icon" class="mx-4 white--text" icon>
             <v-icon size="24px">
               {{ icon }}
             </v-icon>
           </v-btn>
-        </v-card-text>
+        </v-card-text> -->
        
       <v-card-text class="#ccd0d5--text pt-0 " style="width:100%; ; " >
         <ul id="horizontalist" class="justify-start ma-0" style="list-style-type:none; text-align:center; font-size:12px; ">
@@ -159,7 +159,7 @@ line-height: 48px;" >
   </v-footer>
        </v-col>
      </v-row>
-     <div id="example">{{ message }}</div>
+     
    
 
   </v-container>
@@ -167,35 +167,31 @@ line-height: 48px;" >
 </template>
 
 <script>
-import { firebase } from "firebase/app";
+
 import "firebase/firestore";
 import "firebase/auth";
+import firebase from "firebase/app";
 export default {
-    name: 'loginweb',
-
    data(){
      return{
-       email:"",
-       password:""
+       user:
+       {email:"",
+       password:""}
      };
    },
    methods:{
      logged(){
-       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(()=>
+       firebase.auth().signInWithEmailAndPassword(this.user.email,this.user.password).then(()=>
        {
          console.log('logged in')
-         this.$router.replace({path:"/profile"})
+         this.$router.push({path:"/profile"})
        })
      }
    }
   }
 
 </script>
-<script>
-export default {
- 
-}
-</script>
+
 
 <style  scoped>
  
