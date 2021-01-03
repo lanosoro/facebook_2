@@ -1,6 +1,6 @@
 <template>
  <v-container class="hidden-sm-and-down fill-height " fluid ma-0 pa-0 style="background-color:#f0f2f5;" >     
-    <v-row style="padding-bottom:112px position:absolute; background-color:#f0f2f5; min-height: 500px;
+    <v-row style="padding-bottom:112px position:absolute; background-color:#f0f2f5; min-height: 300px;
    margin-bottom: 100px;
    clear: both;">
       <v-col cols="12" md="4">
@@ -13,19 +13,19 @@
              <p style="display:inline; font-size:27px;"> Facebook helps you connect and share <br> with the people in your life.</p>
         </div>
 
-         <v-card elevation="8" width="396px" height="390.35px" @submit.prevent="logged" class="mx-auto mt-10% mb" style="position: absolute;
+         <v-card elevation="8" width="396px" height="390.35px"  class="mx-auto mt-10% mb" style="position: absolute;
     top: 20%;
     right: 20%;
     margin-top: -50px;
     margin-left: -50px;
     border-radius:10px;" >
-      <v-card-text>
-        <v-form >
+      <v-card-text @submit.prevent="logged">
+        <form >
           <v-text-field  single-line
-            outlined label="Email adress or Phone number" />
+            outlined label="Email adress or Phone number" v-model="email"/>
           <v-text-field single-line
-            outlined label="Password" type="password"  />
-          <v-btn primary large block type="submit" @click="logged" style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
+            outlined label="Password" type="password" v-model="password"  />
+          <v-btn primary large block type="submit"  style="background-color:#1877f2; color:#fff; text-transform: capitalize; font-size: 20px;
 line-height: 48px;" >
            <strong>log in</strong> 
           </v-btn>
@@ -49,7 +49,7 @@ line-height: 48px;" >
             Create New Acccount
           </v-btn>
 
-        </v-form>
+        </form>
         <p  style=" 
               min-width:360px;
               display:inline;
@@ -71,7 +71,7 @@ line-height: 48px;" >
 
       </v-col>
       </v-row>    
-     <v-row style="text-align:left;">  
+     <v-row style="text-align:left; height:100px">  
     <v-col>
         <v-footer style="bottom:0; position:absolute; background-color:white; width:100%; " class="justify-center">
       
@@ -168,20 +168,19 @@ line-height: 48px;" >
 
 <script>
 
-import "firebase/firestore";
-import "firebase/auth";
-import firebase from "firebase/app";
+import 'firebase/auth'
+import firebase from "@/plugins/firebase";
 export default {
    data(){
      return{
-       user:
-       {email:"",
-       password:""}
+
+       email:"",
+       password:""
      };
    },
    methods:{
      logged(){
-       firebase.auth().signInWithEmailAndPassword(this.user.email,this.user.password).then(()=>
+       firebase.auth().signInWithEmailAndPassword(this.email,this.password).then(()=>
        {
          console.log('logged in')
          this.$router.push({path:"/profile"})

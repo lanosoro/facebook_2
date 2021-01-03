@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import index from "../views/index.vue";
 import profile from "../views/profile.vue";
+import signup from "../views/signup.vue";
 
 Vue.use(VueRouter);
 const About = { template: "<div>About</div>" };
@@ -35,6 +36,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: profile
+  },
+  {
+    path:"/Signup",
+    name:"signup",
+    component:signup
   }
 ];
 
